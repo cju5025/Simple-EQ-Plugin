@@ -180,9 +180,14 @@ AudioProcessorValueTreeState::ParameterLayout
         AudioProcessorValueTreeState::ParameterLayout layout;
         
         layout.add(std::make_unique<AudioParameterFloat>("LowCut Freq",
-                                                         "LowCutFreq",
+                                                         "LowCut Freq",
                                                          NormalisableRange<float>(20.0f, 20000.0f, 1.0f, 1.0f),
                                                          20.0f));
+        
+        layout.add(std::make_unique<AudioParameterFloat>("HighCut Freq",
+                                                         "HighCut Freq",
+                                                         NormalisableRange<float>(20.0f, 20000.0f, 1.0f, 1.0f),
+                                                         20000.0f));
         
         return layout;
 }
