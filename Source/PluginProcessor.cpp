@@ -212,6 +212,9 @@ AudioProcessorValueTreeState::ParameterLayout
             str << " db/ Oct";
             slopeChoices.add(str);
         }
+        
+        layout.add(std::make_unique<AudioParameterChoice>("LowCut Slope", "LowCut Slope", slopeChoices, 0));
+        layout.add(std::make_unique<AudioParameterChoice>("HighCut Slope", "HighCut Slope", slopeChoices, 0));
                 
         return layout;
 }
