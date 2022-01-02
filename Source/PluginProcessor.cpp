@@ -177,7 +177,14 @@ void SimpleEQAudioProcessor::setStateInformation (const void* data, int sizeInBy
 AudioProcessorValueTreeState::ParameterLayout
     SimpleEQAudioProcessor::createParameterLayout()
 {
-            
+        AudioProcessorValueTreeState::ParameterLayout layout;
+        
+        layout.add(std::make_unique<AudioParameterFloat>("LowCut Freq",
+                                                         "LowCutFreq",
+                                                         NormalisableRange<float>(20.0f, 20000.0f, 1.0f, 1.0f),
+                                                         20.0f));
+        
+        return layout;
 }
 
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
