@@ -204,6 +204,15 @@ AudioProcessorValueTreeState::ParameterLayout
                                                          NormalisableRange<float>(-0.1f, 10.0f, 0.05f, 1.0f),
                                                          1.0f));
         
+        StringArray slopeChoices;
+        for (int i = 0; i < 4; i++)
+        {
+            String str;
+            str << (12 + i * 12);
+            str << " db/ Oct";
+            slopeChoices.add(str);
+        }
+                
         return layout;
 }
 
