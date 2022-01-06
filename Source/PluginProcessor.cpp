@@ -212,17 +212,17 @@ AudioProcessorValueTreeState::ParameterLayout
         
         layout.add(std::make_unique<AudioParameterFloat>("LowCut Freq",
                                                          "LowCut Freq",
-                                                         NormalisableRange<float>(20.0f, 20000.0f, 1.0f, 1.0f),
+                                                         NormalisableRange<float>(20.0f, 20000.0f, 1.0f, 0.5f),
                                                          20.0f));
         
         layout.add(std::make_unique<AudioParameterFloat>("HighCut Freq",
                                                          "HighCut Freq",
-                                                         NormalisableRange<float>(20.0f, 20000.0f, 1.0f, 1.0f),
+                                                         NormalisableRange<float>(20.0f, 20000.0f, 1.0f, 0.5f),
                                                          20000.0f));
         
         layout.add(std::make_unique<AudioParameterFloat>("Peak Freq",
                                                          "Peak Freq",
-                                                         NormalisableRange<float>(20.0f, 20000.0f, 1.0f, 1.0f),
+                                                         NormalisableRange<float>(20.0f, 20000.0f, 1.0f, 0.5f),
                                                          750.0f));
         
         layout.add(std::make_unique<AudioParameterFloat>("Peak Gain",
