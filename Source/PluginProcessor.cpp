@@ -93,6 +93,14 @@ void SimpleEQAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlo
     leftChain.prepare(spec);
     rightChain.prepare(spec);
     
+    auto chainSettings = getChainSettings(apvts);
+    auto peakCoefficients = dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate,
+                                                                          chainSettings.peakFreq,
+                                                                          chainSettings.peakQuality,
+                                                                          Decibels::decibelsToGain(chainSettings.peakGainInDecibels));
+    
+    *leftChain.get<ChainPositions::Peak>().coefficients = *peakCoefficients;
+    *rightChain.get<ChainPositions::Peak>().coefficients = *peakCoefficients;
 }
 
 void SimpleEQAudioProcessor::releaseResources()
@@ -135,6 +143,15 @@ void SimpleEQAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juc
 
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
+    
+    auto chainSettings = getChainSettings(apvts);
+    auto peakCoefficients = dsp::IIR::Coefficients<float>::makePeakFilter(getSampleRate(),
+                                                                          chainSettings.peakFreq,
+                                                                          chainSettings.peakQuality,
+                                                                          Decibels::decibelsToGain(chainSettings.peakGainInDecibels));
+    
+    *leftChain.get<ChainPositions::Peak>().coefficients = *peakCoefficients;
+    *rightChain.get<ChainPositions::Peak>().coefficients = *peakCoefficients;
 
     dsp::AudioBlock<float> block(buffer);
     
